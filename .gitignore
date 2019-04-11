@@ -1,0 +1,17 @@
+# All
+*
+
+# Except files with extension and dirs
+!*.*
+!*/
+# but
+*.out
+*.cbp
+*.depend
+*.layout
+
+# Ignore bin dir
+*/bin/*
+bin/
+*/obj/*
+obj/
