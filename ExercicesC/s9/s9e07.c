@@ -1,68 +1,44 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-typedef struct {
-	int minute;
-	int hour;
-	int day;
-	int month;
-	int year;
-} Date;
-
-typedef struct {
-	int number;
-	float price;
-	int train; 
-	int wagon;
-	int seat;
-	char arrStation[20];
-	char depStation[20];
-	Date departure;
-	Date arrival;
-} Ticket;
-
-
-int traveltime(Ticket ticket);
+void display(char *word);
+void modify(char *word);
 
 int main() {
 
-	Ticket ticket;
+	char word[20];
+	char answer = 'y';
 	char buffer;
 
-	printf("Enter the city of departure: \n");
-	scanf("%s", ticket.depStation);
-	scanf("%c", &buffer);
-	printf("Enter the city of arrival: \n");
-	scanf("%s", ticket.arrStation);
-	scanf("%c", &buffer);
-	printf("Enter the hour of departure: (mm:hh, mm/dd/yyyy)\n");
-	scanf("%d%d%d%d%d",
-	      &ticket.departure.hour,
-		  &ticket.departure.minute,
-		  &ticket.departure.month,
-		  &ticket.departure.day,
-	      &ticket.departure.year);
-	scanf("%c", &buffer);
-	printf("Enter the hour of arrival: (mm:hh, mm/dd/yyyy)\n");
-	scanf("%d%d%d%d%d",
-	      &ticket.arrival.hour,
-		  &ticket.arrival.minute,
-		  &ticket.arrival.month,
-		  &ticket.arrival.day,
-	      &ticket.arrival.year);
+	printf("Enter a word:\t");
+	fflush(stdout);
+	scanf("%s", word);
 	scanf("%c", &buffer);
 
-	printf("%d min\n", traveltime(ticket));
+	printf("Do you want to change the word ? (Y/n)\n" \
+	       "Currently, it's: ");
+	display(word);
+	scanf("%c", &answer);
+	scanf("%c", &buffer);
+
+	if (answer == 'y' || answer == 'Y') {
+		modify(word);
+	}
+	display(word);
 
 	return 0;
 }
 
-int traveltime(Ticket ticket) {
-	int time = 0;
+void display(char *word) {
+	while (*word != '\0') {
+		printf("%c", *word++);
+	}
+	printf("\n");
+}
 
-	time += ticket.arrival.minute - ticket.departure.minute;
-	time += (ticket.arrival.hour - ticket.departure.hour) * 60;
-	time += (ticket.arrival.day - ticket.departure.day) * 24 * 60;
-	time += (ticket.arrival.month - ticket.departure.month) * 30 * 24 * 60;
-	time += (ticket.arrival.minute - ticket.departure.minute) * 12 * 30 * 24 * 60;
-	return time;
+void modify(char *word) {
+	printf("Enter a new word:\t");
+	fflush(stdout);
+	scanf("%s", word);
 }
