@@ -47,7 +47,8 @@ int push(LinkedList *list, int newval){
 }
 
 int insertNode(LinkedList *list, int index, int newval) {
-	Node *current, *head = list->head;
+	Node *current = list->head;
+	Node  *head = list->head;
 	Node *prev;
 	Node *new;
 
