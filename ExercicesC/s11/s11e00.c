@@ -5,13 +5,21 @@
 
 
 int main() {
-	Node *list;
-	Node *first = malloc(sizeof(*first));
-	int i;
-
+	LinkedList *list;
+	Node *first = malloc(sizeof(Node));
 	first = NULL;
 
-	insertNode(&list, 0, 0);
+	list->head = first;
+	list->count = 0;
+
+	push(list, 2);
+	printf("Count: %d\n", list->count);
+	insertNode(list, 0, 0);
+	printf("Count: %d\n", list->count);
+	insertNode(list, 1, 1);
+	printf("Count: %d\n", list->count);
+	insertNode(list, 1, 5);
+	printf("Count: %d\n", list->count);
 	displayList(list);
 	/* appendNode(list, 4); */
 	/* displayList(list); */
@@ -25,16 +33,32 @@ int main() {
 	/* 	   "\n\ts -> display the list"); */
 }
 
-int insertNode(Node **list, int index, int value2) {
-	Node *current = *list;
+int push(LinkedList *list, int newval){
+	Node *new, *head;
+
+	new = malloc(sizeof(Node));
+	head = list->head;
+
+	new->value = newval;
+	new->next = head;
+	list->head = new;
+	++list->count;
+	return EXIT_SUCCESS;
+}
+
+int insertNode(LinkedList *list, int index, int newval) {
+	Node *current, *head = list->head;
 	Node *prev;
-	Node *new = malloc(sizeof(*new));
+	Node *new;
+
 	int pos = 0;
+	new = malloc(sizeof(Node));
 
 	if (index == 0) {
-		new->value = value2;
-		new->next = *list;
-		*list = new;
+		new->value = newval;
+		new->next = head;
+		list->head = new;
+		++list->count;
 		return EXIT_SUCCESS;
 	}
 
@@ -49,14 +73,15 @@ int insertNode(Node **list, int index, int value2) {
 		pos++;
 	}
 
-	new->value = value2;
+	new->value = newval;
 	new->next = current;
 	prev->next = new;
+	++list->count;
 	return EXIT_SUCCESS;
 }
 
-int appendNode(Node **list, int value){
-	Node *current = *list;
+int appendNode(LinkedList *list, int value){
+	Node *current = list->head;
 	Node *new = malloc(sizeof(*new));
 
 	while(current->next != NULL) {
@@ -67,8 +92,8 @@ int appendNode(Node **list, int value){
 	return EXIT_SUCCESS;
 }
 
-Node *delNode(Node *list, int index) {
-	Node *current = list;
+Node *delNode(LinkedList *list, int index) {
+	Node *current = list->head;
 	int pos = 0;
 	while (pos < index) {
 		if (current->next == NULL) {
@@ -90,13 +115,13 @@ int listCount(Node *list) {
 	return count;
 }
 
-void displayList(Node *list) {
+void displayList(LinkedList *list) {
 
-	Node *current = list;
+	Node *current = list->head;
 
 	while (current != NULL) {
 		printf("%d->", current->value);
 		current = current->next;
 	}
-	printf("NULL");
+	printf("NULL\n");
 }

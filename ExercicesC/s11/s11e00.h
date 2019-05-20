@@ -2,16 +2,23 @@
 #include <stdlib.h>
 
 typedef struct Node Node;
+typedef struct LinkedList LinkedList;
 
 struct Node {
 	int value;
 	Node *next;
 };
 
-int insertNode(Node **list, int index, int value);
-int appendNode(Node **list, int value);
-Node *delNode(Node *list, int index);
-void delList(Node *list);
+struct LinkedList {
+	int count;
+	Node *head;
+};
+
+int push(LinkedList *, int);
+int insertNode(LinkedList *, int index, int value);
+int appendNode(LinkedList *, int value);
+Node *delNode(LinkedList *, int index);
+void delList(LinkedList *);
 int listCount(Node *list);
-void displayList(Node *list);
-void displayNode(Node *list, int index);
+void displayList(LinkedList *);
+void displayNode(LinkedList *, int index);
