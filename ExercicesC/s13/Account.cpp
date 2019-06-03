@@ -1,11 +1,12 @@
 #include <iostream>
-#include "Account.h"
+#include "Account.hpp"
 
 using namespace std;
 
+int Account::accountNumber = 0;
 
 Account::Account() {
-	/* accountNumber++; */
+	accountNumber++;
 	id = 0;
 	amount = 0.0;
 }
@@ -17,7 +18,7 @@ Account::Account(int newId, double newAmount) {
 
 void Account::display() {
 	cout << "Account #" << id << "\t" << "amount: " << amount << endl;
-	if (red()) cout << "Bad bad bad!" << endl;
+	if (isRed()) cout << "Bad bad bad!" << endl;
 };
 
 void Account::input() {
@@ -40,6 +41,14 @@ double Account::debit(double money) {
 	return (amount);
 }
 
-bool Account::red() {
+bool Account::isRed() {
 	return (amount < 0);
+}
+
+static double max(double money, Account account) {
+	;
+}
+
+Account::~Account() {
+	accountNumber--;
 }

@@ -12,9 +12,9 @@ class Account {
 	int id;
 	double amount;
 
-	static const int accountNumber = 0;
-
 	public: 
+
+	static int accountNumber;
 
 	Account();
 	Account(int newId, double newAmount);
@@ -22,7 +22,9 @@ class Account {
 	void input();
 	double credit(double money);
 	double debit(double money);
-	bool red();
+	bool isRed();
+	static double max(double money, Account account);
+	~Account();
 };
 
 #endif
