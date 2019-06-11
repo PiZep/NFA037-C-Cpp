@@ -1,12 +1,10 @@
 #include <iostream>
 #include <string>
 
-typedef struct date_t date_t;
-
-struct date_t date {
+struct Date {
 	int year;
 	int month;
-	int day
+	int day;
 };
 
 
@@ -19,7 +17,6 @@ class Grocery {
 		double price;
 		int minimalStock;
 		int currentStock;
-		date_t date;
 
 	public:
 
@@ -36,9 +33,12 @@ class Food: public Grocery {
 
 	protected:
 		double VATRate;
-		date expiration;
+		Date expiration;
 		std::string sellSector;
 
 	public:
-		Food(std::string ref, std::string name, double price, int minimalStock, int currentStock, double VAT, date expiration, std::string sector): Grocery(ref, name, price, minimalStock, currentStock);
-}
+		Food(std::string ref, std::string name, double price, int minimalStock,
+				int currentStock, double VAT, int expYear, int expMonth, int expDay, std::string sector);
+			/* Grocery(ref, name, price, minimalStock, currentStock); */
+		void display();
+};
