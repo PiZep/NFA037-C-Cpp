@@ -1,2 +1,2 @@
-# NFA037-C-C-
+# NFA037-C-Cpp
 Initiation courses about C/C++
